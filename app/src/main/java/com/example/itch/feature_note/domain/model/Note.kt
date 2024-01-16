@@ -13,6 +13,7 @@ import com.example.itch.ui.theme.Purple
 import com.example.itch.ui.theme.White
 import com.example.itch.ui.theme.Yellow
 
+//this is a class of our entity
 @Entity
 data class Note(
     val title: String,
