@@ -12,15 +12,19 @@ import kotlinx.coroutines.flow.Flow
 interface NoteDao {
 
     //Data access object
+    //in this interface we declare functions used to access our object in terms of insert, delete or update
     //here we will also have the list of notes written
     @Query("SELECT * FROM note")
     fun getNotes(): Flow<List<Note>>
 
-    // function to get note by id
+    // function to get note by id to load it
+    //we use suspend because it may take time
     @Query("SELECT * FROM note WHERE id = :id")
     suspend fun getNoteById(id: Int): Note?
 
-    //update a note
+    //insert and update because we use onclick a note
+    //This function inserts a Note into the database.
+    //If there's a conflict (i.e., a note with the same primary key already exists), it replaces the existing note with the new one.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(note: Note)
 
