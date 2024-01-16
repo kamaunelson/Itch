@@ -8,6 +8,9 @@ import kotlinx.coroutines.flow.Flow
 //fake version of our repository
 //remember in our repository is where it is decided where data is gotten from
 
+//important to note that repository is used to access our data sources directly
+//used to determine whether data source either api or database to be forward
+//to the use cases and check if errors have occurred
 interface NoteRepository {
 
     fun getNotes(): Flow<List<Note>>

@@ -5,11 +5,14 @@ import com.example.itch.feature_note.domain.model.Note
 import com.example.itch.feature_note.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.Flow
 
+//important to note that repository uses to access our data sources directly
+//here is where the implementation of our repository takes place
+//our object dao is called for here and pulled directly from notedao
 class NoteRepositoryImpl(
     private val dao: NoteDao
 ): NoteRepository {
     override fun getNotes(): Flow<List<Note>> {
-        TODO("Not yet implemented")
+        return dao.getNotes()
     }
 
     override suspend fun getNoteById(id: Int): Note? {
