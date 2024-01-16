@@ -13,6 +13,7 @@ class GetNotes (
 
     //should only have one public function
     operator fun invoke(
+        //initially declared as a must descending
         noteOrder: NoteOrder = NoteOrder.Date(OrderType.Descending)
     ): Flow<List<Note>> {
         return repository.getNotes().map { notes ->
@@ -20,15 +21,15 @@ class GetNotes (
                 is OrderType.Ascending ->{
                     when(noteOrder){
                         is NoteOrder.Title-> notes.sortedBy { it.title.lowercase() }
-                            is NoteOrder.Date-> notes.sortedBy { it.timestamp }
-                                is NoteOrder.Color-> notes.sortedBy { it.color }
+                        is NoteOrder.Date-> notes.sortedBy { it.timestamp }
+                        is NoteOrder.Color-> notes.sortedBy { it.color }
                     }
                 }
                 is OrderType.Descending ->{
                     when(noteOrder){
-                        is NoteOrder.Title-> notes.sortedBy { it.title.lowercase() }
-                        is NoteOrder.Date-> notes.sortedBy { it.timestamp }
-                        is NoteOrder.Color-> notes.sortedBy { it.color }
+                        is NoteOrder.Title-> notes.sortedByDescending { it.title.lowercase() }
+                        is NoteOrder.Date-> notes.sortedByDescending { it.timestamp }
+                        is NoteOrder.Color-> notes.sortedByDescending { it.color }
                     }
                 }
             }
