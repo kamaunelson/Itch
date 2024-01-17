@@ -13,7 +13,7 @@ class GetNotes (
 
     //should only have one public function
     operator fun invoke(
-        //initially declared as a must descending
+        //initially declared as a must descending by default
         noteOrder: NoteOrder = NoteOrder.Date(OrderType.Descending)
     ): Flow<List<Note>> {
         return repository.getNotes().map { notes ->
